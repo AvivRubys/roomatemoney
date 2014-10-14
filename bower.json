@@ -1,0 +1,17 @@
+{
+  "name": "Roomate Money",
+  "version": "0.1",
+  "authors": [
+    "Aviv Rozenboim <rubysrubys@gmail.com>"
+  ],
+  "description": "An app to help you balance money with your roomates.",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.2.0",
+    "angular": "~1.2.25",
+    "bootstrap-rtl": "~0.9.16",
+    "angular-resource": "~1.2.25",
+    "ng-table": "~0.3.3"
+  }
+}

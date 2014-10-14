@@ -1,0 +1,65 @@
+<html dir="rtl" ng-app="MoneyApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>איזון כספים</title>
+
+    <!-- Bootstrap -->
+    <link href="lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="lib/bootstrap-rtl/dist/css/bootstrap-rtl.css" rel="stylesheet">
+    <link href="lib/ng-table/ng-table.css" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link href="app.css" rel="stylesheet">
+
+    <!-- Libraries -->
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-resource/angular-resource.js"></script>
+    <script src="lib/ng-table/ng-table.js"></script>
+    <script src="lib/underscore/underscore.js"></script>
+    <script src="app.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div ng-controller="MoneyCtrl">
+        <div class="col-md-5">
+          <table ng-table class="table">
+            <thead>
+              <tr>
+                <th>תאריך</th>
+                <th>סה"כ</th>
+                <th>תיאור</th>
+                <th ng-repeat="roomate in roomates | orderBy:roomate.id">{{ roomate.name }}</th>
+              </tr>
+            </thead>
+            <tr ng-repeat="expense in expenses">
+              <td>{{ expense.date | date:'yyyy-MM-dd' }}</td>
+              <td>{{ expense.amount }}</td>
+              <td>{{ expense.description }}</td>
+              <td ng-repeat="roomate in roomates | orderBy:roomate.id">
+                {{ (expense.details | filter:{roomate_id:roomate.id})[0].amount || 0 }}
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-md-3">
+          <table ng-table class="table">
+            <thead>
+              <tr>
+                <th ng-repeat="roomate in roomates | orderBy:roomate.id">{{ roomate.name }}</th>
+              </tr>
+            </thead>
+            <tr>
+              <td ng-repeat="roomate in roomates | orderBy:roomate.id" ng-class="{red: expenseByRoomate[roomate.id] > 0, green: expenseByRoomate[roomate.id] <= 0}">
+                {{ Math.abs(expenseByRoomate[roomate.id]) }}
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+<html>
