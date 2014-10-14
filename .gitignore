@@ -25,3 +25,6 @@ _testmain.go
 
 # Frequently used db for development
 app.db
+
+# Bower components directory
+public/lib
