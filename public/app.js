@@ -1,8 +1,16 @@
 var app = angular.module('MoneyApp', ['ngResource', 'ngTable']);
 
-app.controller('MoneyCtrl', ['$scope', 'Expense', 'Roomate', 'Payment',
-              function ($scope, Expense, Roomate, Payment) {
+app.controller('MoneyCtrl', ['$scope', 'Expense', 'Roomate', 'Payment', 'ngTableParams',
+              function ($scope, Expense, Roomate, Payment, ngTableParams) {
     $scope.Math = window.Math;
+
+    // Disabling pagination
+    $scope.tableConfig = new ngTableParams({
+        count: 99999999
+      }, {
+        counts: []
+    });
+
     Expense.query(function(data) {
       $scope.expenses = data;
     });
