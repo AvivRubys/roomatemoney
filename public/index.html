@@ -25,7 +25,7 @@
     <div class="container">
       <div ng-controller="MoneyCtrl">
         <div class="col-md-5">
-          <h2>הוצאות</h2>
+          <h2  style="text-align:right;">הוצאות</h2>
           <table ng-table="tableConfig" class="table">
             <thead>
               <tr>
@@ -46,7 +46,11 @@
           </table>
         </div>
         <div class="col-md-3">
-          <h2>מאזן</h2>
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-8">
+            <h2>מאזן</h2>
+          </div>
           <table ng-table="tableConfig" class="table">
             <thead>
               <tr>
@@ -61,22 +65,29 @@
             </tr>
           </table>
         </div>
-        <div class="col-md-3">
-          <h2>תשלומים</h2>
+        <div class="col-md-4">
+          <h2 style="text-align:left;">תשלומים</h2>
           <table ng-table="tableConfig" class="table">
             <thead>
               <tr>
                 <th>תאריך</th>
+                <th>תיאור</th>
                 <th>העברה</th>
               </tr>
             </thead>
             <tr ng-repeat="payment in payments | orderBy:payment.date:reverse">
               <td> {{ payment.date | date:'yyyy-MM-dd' }} </td>
+              <td> {{ payment.description }} </td>
               <td> {{ (roomates | filter:{id:payment.from_roomate_id})[0].name }}
                 <span class="glyphicon glyphicon-arrow-left"></span> {{ payment.amount }} <span class="glyphicon glyphicon-arrow-left"></span>
                 {{ (roomates | filter:{id:payment.to_roomate_id})[0].name }}</td>
             </tr>
           </table>
+        </div>
+        <div class="col-md-1">
+          <button class="btn btn-info" ng-click="updateBalance">
+            <i class="glyphicon glyphicon-refresh"></i> עדכן
+          </button>
         </div>
       </div>
     </div>

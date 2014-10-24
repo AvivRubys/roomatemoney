@@ -15,9 +15,13 @@ app.controller('MoneyCtrl', ['$scope', 'Expense', 'Roomate', 'Payment', 'ngTable
       $scope.expenses = data;
     });
 
-    Expense.by_roomate(function(data) {
-      $scope.expenseByRoomate = data;
-    });
+    $scope.updateBalance = function() {
+      Expense.by_roomate(function(data) {
+        $scope.expenseByRoomate = data;
+      });
+    }
+
+    $scope.updateBalance();
 
     Roomate.query(function(data) {
       $scope.roomates = data;
